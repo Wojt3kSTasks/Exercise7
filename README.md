@@ -6,7 +6,7 @@ Przygotuj nowy projekt aplikacji API i razem z EF i podejściem CodeFirst wygene
 
 Poniżej przedstawiony jest diagram na którym będziemy pracować.
 
-![alt text](./Data/cw7DatabaseERD.PNG "Title")
+![alt text](./Data/cw7DatabaseERD.png "Title")
 
 ## Wymogi zadania
 
