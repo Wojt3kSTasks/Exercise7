@@ -27,5 +27,10 @@ namespace Exercise7.Services
             await _context.AddAsync(team);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> DoesTeamExist(int teamId)
+        {
+            return await _context.Teams.AnyAsync(e => e.ID == teamId);
+        }
     }
 }

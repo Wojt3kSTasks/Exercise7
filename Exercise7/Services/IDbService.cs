@@ -7,5 +7,6 @@ namespace Exercise7.Services
     {
         Task<Team> GetTeamProjects(int prescriptionId);
         Task AddNewTeam(Team team);
+        Task<bool> DoesTeamExist(int teamId);
     }
 }

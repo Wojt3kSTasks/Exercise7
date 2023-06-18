@@ -15,11 +15,14 @@ public class TeamController : ControllerBase
         _dbService = dbService;
     }
 
-    [HttpGet("get")]
+    [HttpGet("{teamId}/team-projects")]
     public async Task<IActionResult> GetTeamProjects(int teamId)
     {
         var team = await _dbService.GetTeamProjects(teamId);
-        
+        if (!await _dbService.DoesTeamExist(teamId))
+        {
+            return NotFound($"Team with given ID - {teamId} doesn't exist");
+        }
         
         return Ok(new TeamSummaryDTO
         {
@@ -36,8 +39,8 @@ public class TeamController : ControllerBase
         });
     }
     
-    [HttpPost("add")]
-    public async Task<IActionResult> AddNewDoctor(NewTeamDTO newTeam)
+    [HttpPost]
+    public async Task<IActionResult> AddNewTeam(NewTeamDTO newTeam)
     {
 
         Team team = new Team()
