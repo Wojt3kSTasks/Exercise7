@@ -6,7 +6,7 @@ namespace Exercise7.Data
 {
     public class DeveloperContext : DbContext
     {
-        public DbSet<Developer> Doctors { get; set; }
+        public DbSet<Developer> Developers { get; set; }
         public DbSet<ProjectStatus> ProjectStatuses { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Project> Projects { get; set; }

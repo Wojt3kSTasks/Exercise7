@@ -18,12 +18,11 @@ public class TeamController : ControllerBase
     [HttpGet("{teamId}/team-projects")]
     public async Task<IActionResult> GetTeamProjects(int teamId)
     {
-        var team = await _dbService.GetTeamProjects(teamId);
         if (!await _dbService.DoesTeamExist(teamId))
         {
             return NotFound($"Team with given ID - {teamId} doesn't exist");
         }
-        
+        var team = await _dbService.GetTeamProjects(teamId);
         return Ok(new TeamSummaryDTO
         {
             ID = team.ID,
@@ -42,7 +41,14 @@ public class TeamController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddNewTeam(NewTeamDTO newTeam)
     {
-
+        foreach (var newTeamDeveloper in newTeam.Developers)
+        {
+            if (!await _dbService.DoesDeveloperExist(newTeamDeveloper))
+            {
+                return NotFound($"Developer with given name - {newTeamDeveloper.FirstName} " +
+                                $"{newTeamDeveloper.LastName} doesn't exist");
+            }
+        }
         Team team = new Team()
         {
             Name = newTeam.Name,
